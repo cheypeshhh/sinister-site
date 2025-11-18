@@ -21,7 +21,7 @@ export async function POST(request: NextRequest) {
 		await resend.emails.send({
 			from: YOUR_EMAIL,
 			to: YOUR_EMAIL,
-			subject: `New Sinister lead: ${name.name || 'Unknown'}`,
+			subject: `New Sinister lead: ${name || 'Unknown'}`,
 			text: `
 Name: ${name}
 Email: ${email}
