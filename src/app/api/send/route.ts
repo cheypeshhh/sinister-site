@@ -18,8 +18,8 @@ export async function POST(request: NextRequest) {
 			);
 		}
 
-		await resend.emails.send({
-			from: YOUR_EMAIL,
+		const { data, error } = await resend.emails.send({
+			from: 'Acme <onboarding@resend.dev>',
 			to: YOUR_EMAIL,
 			subject: `New Sinister lead: ${name || 'Unknown'}`,
 			text: `
@@ -32,6 +32,15 @@ Data:
 ${quiz}
     `.trim(),
 		});
+
+		if (error) {
+			return NextResponse.json(
+				{
+					error: error.message,
+				},
+				{ status: error.statusCode ?? 400 },
+			);
+		}
 
 		return NextResponse.json({ success: true }, { status: 200 });
 	} catch (error: unknown) {
