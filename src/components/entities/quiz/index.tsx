@@ -69,7 +69,7 @@ const Quiz = () => {
 							key={current.key}
 							initial={{ opacity: 0, y: 8 }}
 							animate={{ opacity: 1, y: 0 }}
-							className="p-6 rounded-3xl border bg-white shadow-sm"
+							className="p-6 rounded-3xl bg-white shadow-sm"
 						>
 							<h3 className="text-2xl font-semibold">{current.title}</h3>
 							<p className="text-neutral-600 mb-5">{current.subtitle}</p>

@@ -19,7 +19,7 @@ interface IForm {
 }
 
 function isValidEmail(email: string): boolean {
-	return /.+@.+\..+/.test(email);
+	return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
 const cx = (...classes: (string | false | null | undefined)[]) =>
@@ -87,7 +87,7 @@ const Form: FC<IForm> = ({ setSubmitted, quiz }) => {
 			onSubmit={submitAll}
 			initial={{ opacity: 0, y: 8 }}
 			animate={{ opacity: 1, y: 0 }}
-			className="p-6 rounded-3xl border bg-white shadow-sm"
+			className="p-6 rounded-3xl bg-white shadow-sm"
 		>
 			<h3 className="text-2xl font-semibold mb-2">
 				Where can we send your scoped plan?
@@ -98,7 +98,9 @@ const Form: FC<IForm> = ({ setSubmitted, quiz }) => {
 			</p>
 			<div className="grid sm:grid-cols-2 gap-4">
 				<div>
-					<label className="text-sm text-neutral-600">Full name</label>
+					<label className="text-sm text-neutral-600">
+						Full name <span style={{ color: 'red' }}>*</span>
+					</label>
 					<input
 						required
 						value={lead.name}
@@ -107,7 +109,9 @@ const Form: FC<IForm> = ({ setSubmitted, quiz }) => {
 					/>
 				</div>
 				<div>
-					<label className="text-sm text-neutral-600">Work email</label>
+					<label className="text-sm text-neutral-600">
+						Work email <span style={{ color: 'red' }}>*</span>
+					</label>
 					<input
 						required
 						type="email"
@@ -128,7 +132,6 @@ const Form: FC<IForm> = ({ setSubmitted, quiz }) => {
 				<div>
 					<label className="text-sm text-neutral-600">Website (optional)</label>
 					<input
-						type="url"
 						value={lead.website}
 						onChange={(e) => setLead({ ...lead, website: e.target.value })}
 						className="mt-1 w-full px-3 py-2 rounded-xl border   outline-none"
